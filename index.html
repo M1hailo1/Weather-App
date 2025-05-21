@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WeatherMM</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div class="weather-input">
+        <div class="input-group">
+          <div class="unazad">
+            <a href="/List of projects/index.html"
+              ><i class="fa-solid fa-backward"></i
+            ></a>
+          </div>
+          <input
+            type="text"
+            id="userLocation"
+            placeholder="Search for places"
+          />
+          <select class="converter" id="converter">
+            <option>°C</option>
+            <option>°F</option>
+          </select>
+
+          <i class="fa fa-search" onclick="findLocation()"></i>
+        </div>
+        <div class="weatherIcon"></div>
+        <h2 class="temperature"></h2>
+        <div class="feelsLike"></div>
+        <div class="description"></div>
+        <hr />
+        <div class="date"></div>
+        <div class="city"></div>
+      </div>
+      <div class="weather-output">
+        <h2 class="heading">Highlights</h2>
+        <div class="Highlights">
+          <div class="humidity">
+            Humidity
+            <i class="fa-solid fa-water"></i>
+            <h1 id="HValue"></h1>
+          </div>
+          <div class="wind-speed">
+            Wind Speed
+            <i class="fa-solid fa-wind"></i>
+            <h1 id="WValue"></h1>
+          </div>
+          <div class="sun">
+            <span>
+              <i id="rise" class="fa-solid fa-sun"></i>
+              <p><span id="SRValue">Sunrise</span></p>
+            </span>
+            <span>
+              <i id="set" class="fa-regular fa-sun"></i>
+              <p><span id="SSValue">Sunset</span></p>
+            </span>
+          </div>
+          <div class="clouds">
+            Clouds
+            <i class="fa-solid fa-cloud"></i>
+            <h1 id="CValue"></h1>
+          </div>
+          <div class="tempsmaxmin">
+            <span>
+              <i id="hot" class="fa-solid fa-temperature-high"></i>
+              <p><span id="MTValue">Max Temp.</span></p>
+            </span>
+            <span>
+              <i id="cold" class="fa-solid fa-temperature-low"></i>
+              <p><span id="MinTValue">Min Temp.</span></p>
+            </span>
+          </div>
+          <div class="pressure">
+            Pressure
+            <i class="fa-solid fa-fire"></i>
+            <h1 id="PValue"></h1>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="main.js"></script>
+  </body>
+</html>
