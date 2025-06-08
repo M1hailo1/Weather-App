@@ -112,6 +112,7 @@ function TemConverter(temp) {
     let ctof = (tempValue2 * 9) / 5 + 32;
     message = ctof + "<span>" + "\xB0F</span>";
   }
+  findLocation();
   return message;
 }
 
