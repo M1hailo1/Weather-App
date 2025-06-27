@@ -21,6 +21,34 @@ const Forecast = document.querySelector(".Forecast");
 WEATHER_API = `https://api.openweathermap.org/data/2.5/weather?appid=${myKey}&q=`;
 WEATHER_DATA = `https://api.openweathermap.org/data/2.5/weather?appid=${myKey}&exclude=minutely&units=metric&`;
 
+window.onload = function () {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      function (position) {
+        fetch(
+          `https://api.openweathermap.org/data/2.5/weather?appid=${myKey}&lat=${position.coords.latitude}&lon=${position.coords.longitude}`
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            userLocation.value = data.name;
+            findLocation();
+          })
+          .catch(() => {
+            userLocation.value = "Kragujevac";
+            findLocation();
+          });
+      },
+      function () {
+        userLocation.value = "Kragujevac";
+        findLocation();
+      }
+    );
+  } else {
+    userLocation.value = "Kragujevac";
+    findLocation();
+  }
+};
+
 //Poziv API-a kako bi dobili zeljene podatke
 function findLocation() {
   fetch(WEATHER_API + userLocation.value)
@@ -112,7 +140,6 @@ function TemConverter(temp) {
     let ctof = (tempValue2 * 9) / 5 + 32;
     message = ctof + "<span>" + "\xB0F</span>";
   }
-  findLocation();
   return message;
 }
 
@@ -121,4 +148,8 @@ userLocation.addEventListener("keydown", function (e) {
   if (e.key === "Enter") {
     findLocation();
   }
+});
+
+converter.addEventListener("change", function () {
+  findLocation();
 });
