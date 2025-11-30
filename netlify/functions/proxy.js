@@ -1,9 +1,25 @@
 export async function handler(event, context) {
   const API_KEY = process.env.MY_SECRET_API_KEY;
 
+  const headers = {
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Headers": "Content-Type",
+    "Access-Control-Allow-Methods": "GET, OPTIONS",
+  };
+
+  if (event.httpMethod === "OPTIONS") {
+    return {
+      statusCode: 200,
+      headers,
+      body: "",
+    };
+  }
+
   if (!API_KEY) {
     return {
       statusCode: 500,
+      headers,
       body: JSON.stringify({ error: "API key not configured" }),
     };
   }
@@ -20,6 +36,7 @@ export async function handler(event, context) {
     } else {
       return {
         statusCode: 400,
+        headers,
         body: JSON.stringify({ error: "Missing required parameters" }),
       };
     }
@@ -29,14 +46,13 @@ export async function handler(event, context) {
 
     return {
       statusCode: 200,
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers,
       body: JSON.stringify(data),
     };
   } catch (error) {
     return {
       statusCode: 500,
+      headers,
       body: JSON.stringify({ error: "Failed to fetch weather data" }),
     };
   }
