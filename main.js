@@ -21,7 +21,9 @@ const Forecast = document.querySelector(".Forecast");
 //WEATHER_API = `https://api.openweathermap.org/data/2.5/weather?appid=${myKey}&q=`;
 //WEATHER_DATA = `https://api.openweathermap.org/data/2.5/weather?appid=${myKey}&exclude=minutely&units=metric&`;
 
-const WEATHER_API = "/.netlify/functions/proxy";
+//const WEATHER_API = "/.netlify/functions/proxy";
+const WEATHER_API =
+  "https://snazzy-bunny-a1ecf0.netlify.app/.netlify/functions/proxy";
 
 window.onload = function () {
   if (navigator.geolocation) {
