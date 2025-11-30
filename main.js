@@ -18,15 +18,20 @@ const PValue = document.getElementById("PValue");
 const Forecast = document.querySelector(".Forecast");
 
 //Kreiranje promenljive za poziv API-a sa mojim API kljucem
-WEATHER_API = `https://api.openweathermap.org/data/2.5/weather?appid=${myKey}&q=`;
-WEATHER_DATA = `https://api.openweathermap.org/data/2.5/weather?appid=${myKey}&exclude=minutely&units=metric&`;
+//WEATHER_API = `https://api.openweathermap.org/data/2.5/weather?appid=${myKey}&q=`;
+//WEATHER_DATA = `https://api.openweathermap.org/data/2.5/weather?appid=${myKey}&exclude=minutely&units=metric&`;
+
+const WEATHER_API = "/.netlify/functions/proxy";
 
 window.onload = function () {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
       function (position) {
+        //fetch(
+        //`https://api.openweathermap.org/data/2.5/weather?appid=${myKey}&lat=${position.coords.latitude}&lon=${position.coords.longitude}`
+        //)
         fetch(
-          `https://api.openweathermap.org/data/2.5/weather?appid=${myKey}&lat=${position.coords.latitude}&lon=${position.coords.longitude}`
+          `${WEATHER_API}?lat=${position.coords.latitude}&lon=${position.coords.longitude}`
         )
           .then((response) => response.json())
           .then((data) => {
@@ -51,7 +56,8 @@ window.onload = function () {
 
 //Poziv API-a kako bi dobili zeljene podatke
 function findLocation() {
-  fetch(WEATHER_API + userLocation.value)
+  //fetch(WEATHER_API + userLocation.value)
+  fetch(WEATHER_API + "?q=" + userLocation.value)
     .then((response) => response.json())
     .then((data) => {
       if (data.cod != "" && data.cod != 200) {
@@ -61,7 +67,8 @@ function findLocation() {
       console.log(data);
       city.innerHTML = data.name + ", " + data.sys.country;
       weatherIcon.style.background = `url(https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png)`;
-      fetch(WEATHER_DATA + `lon=${data.coord.lon}&lat=${data.coord.lat}`)
+      //fetch(WEATHER_DATA + `lon=${data.coord.lon}&lat=${data.coord.lat}`)
+      fetch(`${WEATHER_API}?lon=${data.coord.lon}&lat=${data.coord.lat}`)
         .then((response) => response.json())
         .then((data) => {
           console.log(data);
